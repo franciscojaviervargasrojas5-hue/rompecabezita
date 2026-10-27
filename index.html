@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rompecabezas de Amor</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+<body>
+
+  <!-- Música de fondo -->
+  <audio id="bg-music" src="cancion.mp3" loop preload="auto"></audio>
+
+  <div class="container">
+    <header>
+      <h1>NUESTRO ROMPECABEZAS DE AMOR</h1>
+      <p class="subtitle">Arma la imagen para descubrir un mensaje especial</p>
+    </header>
+
+    <!-- Menú de Inicio -->
+    <div id="setup-screen" class="glass-card">
+      <h2>Elige la Dificultad</h2>
+      <div class="grid-selector">
+        <button class="btn-diff active" data-grid="6">
+          <span class="diff-title">Fácil</span>
+          <span class="diff-spec">6 x 6 (36 Piezas)</span>
+        </button>
+        <button class="btn-diff" data-grid="12">
+          <span class="diff-title">Medio</span>
+          <span class="diff-spec">12 x 12 (144 Piezas)</span>
+        </button>
+        <button class="btn-diff" data-grid="20">
+          <span class="diff-title">Difícil</span>
+          <span class="diff-spec">20 x 20 (400 Piezas)</span>
+        </button>
+      </div>
+
+      <div class="start-action">
+        <button id="start-btn" class="btn-primary">Comenzar Rompecabezas</button>
+      </div>
+    </div>
+
+    <!-- Pantalla de Juego -->
+    <div id="game-screen" class="hidden">
+      <div class="game-controls glass-card">
+        <div class="stat">
+          <span class="stat-label">Tiempo</span>
+          <span id="timer" class="stat-value">00:00</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">Movimientos</span>
+          <span id="moves" class="stat-value">0</span>
+        </div>
+        <div class="control-actions">
+          <button id="toggle-preview" class="btn-secondary">Ver Guía</button>
+          <button id="audio-toggle" class="btn-secondary">🎵 Música: ON</button>
+        </div>
+      </div>
+
+      <div class="puzzle-wrapper">
+        <div id="puzzle-board" class="glass-card"></div>
+        <div id="preview-modal" class="hidden glass-card">
+          <img id="preview-img" src="" alt="Vista previa">
+          <p>Toca para cerrar</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal de Victoria / Carta de Amor -->
+  <div id="victory-modal" class="modal-overlay hidden">
+    <div class="modal-content glass-card">
+      <div class="heart-icon">❤️</div>
+      <h2>¡Lo lograste, mi amor!</h2>
+      <div class="completed-image-container">
+        <img id="final-image" src="" alt="Foto completada">
+      </div>
+      <div class="letter-box">
+        <p id="typewriter-text"></p>
+      </div>
+      <button id="restart-btn" class="btn-primary">Volver a Jugar</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
