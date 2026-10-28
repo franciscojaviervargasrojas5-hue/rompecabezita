@@ -158,7 +158,7 @@ header h1 {
   max-width: 550px;
   aspect-ratio: 1 / 1;
   display: grid;
-  gap: 1px;
+  gap: 2px;
   padding: 8px;
   background: rgba(0, 0, 0, 0.4);
   touch-action: none;
@@ -167,14 +167,14 @@ header h1 {
 .puzzle-piece {
   background-repeat: no-repeat;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 3px;
   transition: transform 0.1s ease, box-shadow 0.1s ease;
   user-select: none;
 }
 
 .puzzle-piece.selected {
-  outline: 2px solid #ff758c;
-  box-shadow: 0 0 10px #ff758c;
+  outline: 3px solid #ff758c;
+  box-shadow: 0 0 12px #ff758c;
   z-index: 10;
   transform: scale(1.05);
 }
