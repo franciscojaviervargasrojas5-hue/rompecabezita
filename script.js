@@ -1,16 +1,16 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // Configuración de imagen (Soporte foto1.jpg y foto1.jpeg)
+  // Configuración de imagen (Soporte foto1.jpg.jpeg, foto1.jpg y foto1.jpeg)
   const imageSources = ['foto1.jpg.jpeg', 'foto1.jpg', 'foto1.jpeg'];
   let activeImageSrc = imageSources[0];
 
   // Carta de amor
   const loveLetterText = 
-    "Eres la mujer más maravillosa del mundo.  Cada pieza de este rompecabezas representa un momento especial a tu lado, " +
+    "Eres la mujer más maravillosa del mundo. Cada pieza de este rompecabezas representa un momento especial a tu lado, " +
     "un recuerdo que siempre llevo en mi corazón cucha. Gracias por iluminar mis días con tu sonrisa y ser la mujer con la que siempre sueño, la que amo con toda mi alma. " +
     "¡Te amo infinitamente mi Frania y te amare ara siempre , porque algo que puedo asegurarte es que solo te amo a ti y a nadie mas que a ti! ❤️";
 
-  // Variables del Estado del Juego
-  let gridSize = 6;
+  // Variables del Estado del Juego (Por defecto 4x4)
+  let gridSize = 4;
   let pieces = [];
   let selectedPiece = null;
   let movesCount = 0;
@@ -35,19 +35,20 @@ document.addEventListener('DOMContentLoaded', () => {
   const typewriterText = document.getElementById('typewriter-text');
   const restartBtn = document.getElementById('restart-btn');
 
-  // Precargar imagen probando formatos
-  function loadImage() {
+  // Precargar imagen probando formatos automáticamente
+  function loadImage(index = 0) {
+    if (index >= imageSources.length) return;
+
     const img = new Image();
-    img.src = activeImageSrc;
-    img.onerror = () => {
-      if (activeImageSrc === imageSources[0]) {
-        activeImageSrc = imageSources[1];
-        previewImg.src = activeImageSrc;
-        finalImage.src = activeImageSrc;
-      }
+    img.onload = () => {
+      activeImageSrc = imageSources[index];
+      previewImg.src = activeImageSrc;
+      finalImage.src = activeImageSrc;
     };
-    previewImg.src = activeImageSrc;
-    finalImage.src = activeImageSrc;
+    img.onerror = () => {
+      loadImage(index + 1);
+    };
+    img.src = imageSources[index];
   }
   loadImage();
 
@@ -66,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
     gameScreen.classList.remove('hidden');
     
     // Reproducir música
-    bgMusic.play().catch(() => console.log("Audio autostart bloqueado"));
+    bgMusic.play().catch(() => console.log("Audio autostart bloqueado por el navegador"));
     
     initGame();
   });
@@ -121,6 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const correctCol = pieceData.id % gridSize;
       const percentage = 100 / (gridSize - 1);
 
+      // Corrección de sintaxis en el cálculo de backgroundSize y backgroundPosition
       piece.style.backgroundImage = `url('${activeImageSrc}')`;
       piece.style.backgroundSize = `${gridSize * 100}% ${gridSize * 100}%`;
       piece.style.backgroundPosition = `${correctCol * percentage}% ${correctRow * percentage}%`;
